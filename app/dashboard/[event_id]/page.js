@@ -23,8 +23,6 @@ import { useRouter } from 'next/router';
       neoncricket: neoncricket
     }
 
-    // console.log("eventID", eventID);
-
     const [formData, setFormData] = useState({ title: "", description: "", committee: "" });
     const [image, setImage] = useState('');
     const [file, setFile] = useState('')
@@ -33,35 +31,39 @@ import { useRouter } from 'next/router';
     const fileInputRef = useRef(null);
     const [isError,setIsError] = useState(false);
     const [oldImage,setOldImage] = useState('')
+
+
     useEffect(() => {
       const fetchEventData = async () => {
         try {
-          console.log("fetching data")
-          console.log("eventID:", eventID.event_id);
+          // console.log("fetching data")
+          // console.log("eventID:", eventID.event_id);
           const cardRef = store.collection('cards');
           const doc = await cardRef.doc(eventID.event_id).get()
           if(!doc.exists){
-            console.log('no document');
+            // console.log('no document');
             return
           }
           const data = doc.data();
-          console.log(data.description)
+          // console.log(data.description)
           setFormData({
             title: data.Slogan,
             description:data.description,
             committee: data.Committee,
           });
+
           setImage(data.Image in cardImage ? cardImage[data.Image] : data.Image);
           setUrl(data.Image in cardImage ? cardImage[data.Image] : data.Image);
           setOldImage(data.Image in cardImage ? data.Image: "")
-          // Now you can use eventData as needed
         } catch (error) {
           console.error("Error fetching document:", error);
         }
     
       }
+
+      // if the url path is not /dashboard/create-event, fetch the event data
       if (eventID.event_id && eventID.event_id !== 'create-event') {
-        console.log("executing")
+        // console.log("executing")
         fetchEventData();
       }
     }, []) 
@@ -117,7 +119,6 @@ import { useRouter } from 'next/router';
         setIsError(true);
         return
       }
-        // return alert("Please fill all the fields");
 
       try{
         if(eventID.event_id === 'create-event'){
@@ -153,35 +154,14 @@ import { useRouter } from 'next/router';
   
     }
 
-  //   const handleFileUpload = async(file) =>{
-  //     //creating unique file name  
-  //     const timestamp = Date.now().toString();
-  //     const randomString = Math.random().toString(36).substring(2);
-  //     const fileName = `${timestamp}_${randomString}_${file.name}`;
-
-      
-  //    //uploading the file into firebase
-  //    const storageRefInstance = storageRef(getStorage(),fileName);
-  //    uploadBytes(storageRefInstance,file)
-  //    .then(() =>{
-  //        getDownloadURL(storageRefInstance)
-  //        .then((downloadURL) => {
-  //             setImgUrl(downloadURL)
-  //        })
-  //        .catch((e) =>{
-  //            console.error(`An error occurred ${e.message}`);
-  //        })
-  //    })
-  //    .catch(e => {
-  //        console.error(`An error occured ${e.message}`);
-  //    })
-
-  //  }
+ 
    function getCurrentDate() {
     const d = new Date();
     return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
   }
 
+
+  // handle event creation 
     const createEvent = async () => {
       const ImgURL =await handleFileUpload(file);
       console.log("url:",url);
@@ -213,6 +193,7 @@ import { useRouter } from 'next/router';
       } 
     }
 
+    // handle event update 
     const updateEvent = async () => {
       const ImgURL = await handleFileUpload(file);
        console.log("url:",url);
