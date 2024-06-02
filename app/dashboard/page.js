@@ -4,12 +4,11 @@ import { fetchEventData } from '@/helper/EventData'
 import React from 'react'
 import notfound from '../../image/notfound.png'
 import Image from 'next/image'
-
+  
 
 const Dashboard = async() => {
   const data = await fetchEventData();
   
-  // const data = []
   return (
     <div className='h-screen p-4 bg-gray-100 dark:bg-zinc-950'>
         <Header/>

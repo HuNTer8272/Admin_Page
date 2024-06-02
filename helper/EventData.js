@@ -17,7 +17,6 @@ export const fetchEventData = async() => {
 
 const subscribeToEvents = () => {
     return store.collection("cards").onSnapshot((snapshot) => {
-        // eventData.length = 0;
         const eventData = []
         snapshot.forEach((doc) => {
             eventData.push({
@@ -29,7 +28,6 @@ const subscribeToEvents = () => {
     })
 }
 
-// fetchEvents();
 
 
 export const unsubscribe = subscribeToEvents();
