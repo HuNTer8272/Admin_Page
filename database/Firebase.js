@@ -12,14 +12,7 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
-    // apiKey: "AIzaSyCux9bTKN9FyVOLbETNukDwv2Q8QnhqSjk",
-    // authDomain: "product-page-94cad.firebaseapp.com",
-    // databaseURL: "https://product-page-94cad-default-rtdb.asia-southeast1.firebasedatabase.app",
-    // projectId: "product-page-94cad",
-    // storageBucket: "product-page-94cad.appspot.com",
-    // messagingSenderId: "358690562695",
-    // appId: "1:358690562695:web:238f513df58ffc34838e22",
-    // measurementId: "G-44NDCPZPXH"
+ 
 };
 
 firebase.initializeApp(firebaseConfig);
